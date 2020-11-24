@@ -62,6 +62,7 @@
 					</ul>
 				</div>
 			</footer>
+			<Mess v-if="showTip" :post="tip" :vote="handleVote"></Mess>
 	</div>
 </template>
 
@@ -86,7 +87,9 @@ export default {
 			resValue:'',		//搜索列表
 			searchlist:[],	//搜索菜名源
 			showlist:false,	//搜索显示框
-			showval:[]	//搜索显示的值
+			showval:[],	//搜索显示的值
+			showTip:false,  //消息显示
+			tip:{}		//提示内容
 
 		}
 	},
@@ -102,6 +105,15 @@ export default {
 		}
 	},
 	methods:{
+		handleVote(val){
+			
+			this.tip=val
+			this.showTip = true
+			let that = this
+			setTimeout(function(){
+				that.showTip = false
+			},2000)
+		},
 		listMenu(){
 			// let that = this;
 			// this.btnloading1 = true;
@@ -164,7 +176,7 @@ export default {
 				console.log(item,val)
 				let i = RegExp(item)
 				let v = RegExp(val)
-				console.log(v.test(i)==true,"检查后的对比值")
+				// console.log(v.test(i)==true,"检查后的对比值")
 					return v.test(i)==true
 			})
 		},
@@ -179,7 +191,7 @@ export default {
 		},
 		changeAbout(index){	//搜索内容跳转
 		let val = this.$refs.list[index].innerHTML
-			console.log(this.$refs.list[index].innerHTML,"你选了我")
+			// console.log(this.$refs.list[index].innerHTML,"你选了我")
 			this.$store.commit('changeName',val)
 			this.$router.push({name:'About'})
 		},
@@ -187,7 +199,11 @@ export default {
 			console.log(this.resValue,"值")
 		
 			if(this.resValue==''){
-					alert("请输入完整菜名")
+					let val ={
+						title:"沙雕",
+						tip:'你还没有输入菜名！'
+					}
+					this.handleVote(val)
 			}else{
 				let that = this;
 				let val = this.searchlist.filter(function(item){
@@ -235,7 +251,11 @@ export default {
 	created(){
 		let cal  = this.$store.state.table;
 		if(cal==""){
-			alert("你的桌子号意外丢失 请重新选择！")
+			let val = {
+				title:'尊贵的用户',
+				tip:'你的桌号意外丢失，请重新选择！'
+			}
+			this.handleVote(val);
 			this.$router.push({name:"Start"})
 		}
 	}

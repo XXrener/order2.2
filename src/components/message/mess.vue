@@ -39,5 +39,9 @@
         top: 0;
         left: 0;
         box-shadow:0px 5px 5px #555;
+
+        li{
+            list-style-type:none;
+        }
     }
 </style>
