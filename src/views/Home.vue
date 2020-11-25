@@ -28,7 +28,7 @@
 			<main>
 				<div class="home-cart">							
 					<div class="home-cart-list" v-for=" item in listData" :key="item.id">
-							<h3>{{item.title}}</h3>
+							<h3 ref="title">{{item.title}}</h3>
 						<div class="home-cart-dis">
 							<div class="home-cart-list-name" v-for=" food in item.list" :key="food.id">
 									<div class="home-cart-list-about">
@@ -114,55 +114,67 @@ export default {
 				that.showTip = false
 			},2000)
 		},
-		listMenu(){
-			// let that = this;
-			// this.btnloading1 = true;
-			this.navigate = !this.navigate;
-			this.listShow = !this.listShow;	
-			console.log(this.listShow,"你激活了,菜单列表")
+		handleScroll(e) {
+				this.$nextTick(()=>{
+					console.log(document.documentElement.scrollTop,"document.documentElement.scrollTop")
+					// console.log(document.body.scrollTop,"document.body.scrollTop")
+				})
+				//  const top = e.target.scrollTop; //兼容不同的浏览器
+				// console.log(window.pageYOffset,"window.pageYOffset")
+				
+				// 
+				// console.log(window.scrollTo,"window.scrollTo")
+				// console.log(e.target.scrollTop,"e.target.scrollTop");
 			
+		
 		},
-		subMenu(index){
-			console.log(index,"列表下标么")
+		listMenu(e){
+			// let that = this;
+			this.btnloading1 = true;
+			this.navigate = !this.navigate;
+			this.listShow = !this.listShow;
+		},
+		subMenu(index,e){
+			
 			this.listShow = !this.listShow
 			this.navigate = !this.navigate
-			
-			// smoothscroll.polyfill();
+			this.btnloading1 = false
 			this.$nextTick(()=>{
-        		let scroll = document.documentElement|| document.body
-				console.log(index,"又进来了吗")
-				switch(index){  //动画
+				
+				switch(index){
 					case 0:
-					window.scrollTo({ //平滑滚动
-						top: 0, 
-						behavior: "smooth" 
-					});
-					
-					// scroll.scrollTop = 0;
-					break;
+						window.scrollTo({
+							top:0,
+							behavior:'smooth'
+						})
+						break;
 					case 1:
-					window.scrollTO({top:600});
-					console.log("怎么没进来")
-					console.log("456465",window)
-					break;
-					case 2:
-					window.scrollTo(100,600);
-					
-					console.log(scroll.scrollTop)
-					// scroll.scrollTop = 1173;
-					break;
-					case 3:
-					window.scrollTo({ //平滑滚动
-						top: 2786, 
-						behavior: "smooth" 
-					});
-					
-					console.log(scroll.scrollTop)
-					// scroll.scrollTop =1653;
-					break;
+						window.scrollTo({
+							top:904,
+							behavior:'smooth'
+						})
+						break;
+					case 1:
+						window.scrollTo({
+							top:2271,
+							behavior:'smooth'
+						})
+						break;
+					case 1:
+						window.scrollTo({
+							top:3110,
+							behavior:'smooth'
+						})
+						break;
+					case 1:
+						window.scrollTo({
+							top:4321,
+							behavior:'smooth'
+						})
+						break;
 				}
-
-      	})
+			})
+			
        
 		},
 		changeSearch(){
@@ -228,12 +240,14 @@ export default {
 	
 	},
 	mounted(){
+		
+		window.addEventListener('scroll',this.handleScroll,true),
+
+
 		axios.get('/api/menu.json').then(res =>{  //获取本地JSON
 
 			if(res.data){
 				this.listData = res.data.body.menulist
-				// console.log(this.listData,"有没有获取到")
-				// console.log( this.listData,this.listData.length,"长度")
 				for (let i = 0; i < this.listData.length; i++) {
 					const s = this.listData[i];
 					for (let j = 0; j < s.list.length; j++) {
@@ -264,7 +278,7 @@ export default {
 <style lang="scss">
 #home{
 	width: 100vw;
-	height: 100%;
+	// height: 100%;
 	overflow: auto;
 	display: flex;
 	box-sizing: border-box;
