@@ -73,6 +73,7 @@
 /* eslint-disable */
 
 import axios from 'axios'
+// import $ from '$'
 export default {
 	name: 'Home',
 	data(){
@@ -114,13 +115,13 @@ export default {
 				that.showTip = false
 			},2000)
 		},
-		handleScroll(e) {
+		/* handleScroll(e) {
 				this.$nextTick(()=>{
-					console.log(document.documentElement.scrollTop,"document.documentElement.scrollTop")
+					// console.log(document.documentElement.scrollTop,"document.documentElement.scrollTop")
 					// console.log(document.body.scrollTop,"document.body.scrollTop")
 				})
 				
-		},
+		}, */
 		listMenu(e){
 			// let that = this;
 			this.btnloading1 = true;
@@ -209,8 +210,8 @@ export default {
 	},
 	mounted(){
 		
-		window.addEventListener('scroll',this.handleScroll,true),
-
+		// window.addEventListener('scroll',this.handleScroll,true),
+		// console.log($)
 
 		axios.get('/api/menu.json').then(res =>{  //获取本地JSON
 
@@ -323,22 +324,27 @@ export default {
 						flex: 1;
 					}
 					.home-cart-list-name{
-						// flex: 1;
 						width: 50%;
-						// height: 100px;
-						border: crimson 1px solid;
 						overflow: hidden;
 						box-sizing: border-box;
-							padding: 5px;
+						padding:5px;
 						.home-cart-list-about{
+							background-color:#ccc8c8;
+							box-shadow:2px -2px 2px #a09d9d;
+							width:100%;
+							height:100%;
 							
 							a{
 								img{
 									width: 100%;
-									height: auto;
+									height: 130px;
 								}
 								p{
 									line-height: 20px;
+									height:30px;
+									color:#555;
+									font-size:16px;
+									text-indent:2rem;
 								}
 							}
 						}

@@ -22,10 +22,14 @@ Vue.component("Mess",Mess)
 import viewUI from 'view-design'
 import 'view-design/dist/styles/iview.css'
 Vue.use(viewUI)
+
+//Jquery 引入
+import $ from 'jquery'
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
+  $,
   render: h => h(App)
 }).$mount('#app')
