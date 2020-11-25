@@ -28,7 +28,7 @@
 			<main>
 				<div class="home-cart">							
 					<div class="home-cart-list" v-for=" item in listData" :key="item.id">
-							<h3 ref="title">{{item.title}}</h3>
+							<h3>{{item.title}}</h3>
 						<div class="home-cart-dis">
 							<div class="home-cart-list-name" v-for=" food in item.list" :key="food.id">
 									<div class="home-cart-list-about">
