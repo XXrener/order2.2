@@ -28,7 +28,7 @@
 			<main>
 				<div class="home-cart">							
 					<div class="home-cart-list" v-for=" item in listData" :key="item.id">
-							<h3>{{item.title}}</h3>
+							<h3 ref="title">{{item.title}}</h3>
 						<div class="home-cart-dis">
 							<div class="home-cart-list-name" v-for=" food in item.list" :key="food.id">
 									<div class="home-cart-list-about">
@@ -119,14 +119,7 @@ export default {
 					console.log(document.documentElement.scrollTop,"document.documentElement.scrollTop")
 					// console.log(document.body.scrollTop,"document.body.scrollTop")
 				})
-				//  const top = e.target.scrollTop; //兼容不同的浏览器
-				// console.log(window.pageYOffset,"window.pageYOffset")
 				
-				// 
-				// console.log(window.scrollTo,"window.scrollTo")
-				// console.log(e.target.scrollTop,"e.target.scrollTop");
-			
-		
 		},
 		listMenu(e){
 			// let that = this;
@@ -139,40 +132,15 @@ export default {
 			this.listShow = !this.listShow
 			this.navigate = !this.navigate
 			this.btnloading1 = false
+			/* this.$nextTick(()=>{
+				console.log(this.$refs.title[index].offsetTop- document.documentElement.scrollTop)
+			}) */
 			this.$nextTick(()=>{
-				
-				switch(index){
-					case 0:
-						window.scrollTo({
-							top:0,
+				let top=this.$refs.title[index].offsetTop-50-60//50main属性margin-top 60 元素本身高度 
+				window.scrollTo({
+							top:top,
 							behavior:'smooth'
 						})
-						break;
-					case 1:
-						window.scrollTo({
-							top:904,
-							behavior:'smooth'
-						})
-						break;
-					case 1:
-						window.scrollTo({
-							top:2271,
-							behavior:'smooth'
-						})
-						break;
-					case 1:
-						window.scrollTo({
-							top:3110,
-							behavior:'smooth'
-						})
-						break;
-					case 1:
-						window.scrollTo({
-							top:4321,
-							behavior:'smooth'
-						})
-						break;
-				}
 			})
 			
        

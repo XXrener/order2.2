@@ -157,6 +157,7 @@
 #start{
     width: 100%;
     height: 100%;
+    text-align:center;
     // background-color: aqua;
     list-style: none; /*去掉远点*/
     header{
@@ -176,9 +177,10 @@
             margin: 5px;
             h3{
                 line-height: 40px;
-                font-size: 24px;
+                font-size: 18px;
                 color: #888;
                 background-color: #bbdefb;
+                text-align:left;
             }
             .layout{
                 display: flex;
